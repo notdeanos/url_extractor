@@ -14,10 +14,13 @@ from urllib.parse import urlparse
 def extract_urls_from_text(text):
     pattern = r"(http[s]?://\S+)"
     raw_urls = re.findall(pattern, text)
-    urls = [urlparse(url).scheme + "://" + urlparse(url).netloc for url in raw_urls]
-    urls = ["* " + url if url.startswith("http://") else url for url in urls]
+    urls = []
+    for url in raw_urls:
+        parsed_url = urlparse(url)
+        stripped_url = parsed_url.scheme + "://" + parsed_url.netloc
+        if "api.mixpanel.com" not in stripped_url:
+            urls.append("Non-TLS -> " + stripped_url if stripped_url.startswith("http://") else stripped_url)
     return urls
-
 
 def filter_non_http_urls(text):
     urls = extract_urls_from_text(text)
