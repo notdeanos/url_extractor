@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 #
-#
 # Dean Mcdonald <dean@appdome.com> (c) Appdome, Inc 2023.
 #
 # NO SUPPORT OR WARRANTY
+#
+# This script reads in any ASCII file and prints all the URLs. Any non-HTTPs will be indicated by an asterisk.
 #
 
 import sys
